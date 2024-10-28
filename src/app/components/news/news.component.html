@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="row">
+    <!--empty space-->
+    <div class="col-3"></div>
+    <!--NEWS-->
+    <div class="col-6 wall">
+      <div *ngFor="let new of this.news" class="card text-white bg-info mb-3">
+        <div class="card-header row">
+          <!--HEADER-->
+          <div class="col-10" style="margin-top: 0.5rem;">
+            <h5>{{new.title}}</h5>
+          </div>
+          <button *ngIf="this.window == 1" type="button" class="btn btn-danger col-2" (click)="archiveNew(new._id)">Archive</button>
+          <button *ngIf="this.window == 2" type="button" class="btn btn-danger col-2" (click)="removeNew(new._id)">Remove</button>
+        </div>
+        <!--BODY-->
+        <div class="card-body">
+          <h5 class="card-title">{{new.description}}</h5>
+          <p class="card-text">{{new.content}}</p>
+          <p class="card-text">{{new.date}}</p>
+        </div>
+      </div>
+    </div>
+    <!--empty space-->
+    <div class="col-4"></div>
+  </div>
+</div>
