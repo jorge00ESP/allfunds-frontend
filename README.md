@@ -1,27 +1,58 @@
-# AllfundsFrontend
+# Demo All funds Front
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.6.
+Version NodeJS -> 20.18.0
+Puerto en fase de desarrollo: 4200
 
-## Development server
+## Instalación del proyecto
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Descargar el proyecto de github y en la carpeta raiz ejecutar: 
 
-## Code scaffolding
+```bash
+npm install
+```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Para iniciar el proyecto: 
 
-## Build
+```bash
+npm start
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Para hacer una build del proyecto:
 
-## Running unit tests
+```bash
+ng build
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Despliegue del proyecto en DOCKER
 
-## Running end-to-end tests
+Para meter el proyecto en un contendor de docker, he creado en una carpeta los archivos Dockerfile, compose.yml y una carpeta llamada html en la que va una build del proyecto dentro
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+### Dockerfile
 
-## Further help
+```bash
+FROM httpd:2.4
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+COPY ./html/ /usr/local/apache2/htdocs/
+```
+
+### compose.yml
+
+```bash
+services:
+  apache-server:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: apache-server
+    ports:
+      - "80:80"
+    volumes:
+      - ./html:/usr/local/apache2/htdocs
+    restart: always
+```
+
+Una vez creados los archivos y meter la build dentro de la carpeta html, solo falta desplegar el contenedor:
+
+```bash
+docker-compose up -d
+```
