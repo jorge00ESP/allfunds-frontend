@@ -14,7 +14,7 @@
         </div>
         <div class="form-group">
           <label for="content">Content</label>
-          <textarea class="form-control" id="content" name="content" rows="3" [(ngModel)]="valueContent"></textarea>
+          <textarea class="form-control" id="content" name="content" rows="3" placeholder="Type your new" [(ngModel)]="valueContent"></textarea>
         </div>
         <div class="form-group">
           <label for="author">Author</label>
@@ -38,7 +38,9 @@
         <div class="card-body">
           <h5 class="card-title">{{new.description}}</h5>
           <p class="card-text">{{new.content}}</p>
-          <p class="card-text">{{new.date}}</p>
+          <p class="card-text">{{new.author}}</p>
+          <p *ngIf="this.window == 1" class="card-text" >{{new.date}}</p>
+          <p *ngIf="this.window == 2" class="card-text">{{new.archiveDate}}</p>
         </div>
       </div>
     </div>
