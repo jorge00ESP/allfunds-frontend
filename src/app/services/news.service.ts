@@ -19,6 +19,18 @@ export class NewsService {
     return this.http.get(this.newsUrl + '/archived');
   }
 
+  createNew(title: string, description: string, content: string, author: string){
+
+    const body = {
+      title: title,
+      description: description,
+      content: content,
+      author: author
+    }
+
+    return this.http.post(this.newsUrl, body);
+  }
+
   archiveNew(id: string){
     return this.http.patch(this.newsUrl + id, {});
   }

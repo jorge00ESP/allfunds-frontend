@@ -14,6 +14,11 @@ export class NewsComponent implements OnInit {
 
   news: New[] = [];
 
+  valueTitle: string = '';
+  valueDescription: string = '';
+  valueContent: string = '';
+  valueAuthor: string = '';
+
   constructor(private newService: NewsService){}
 
   ngOnInit(): void {
@@ -28,6 +33,17 @@ export class NewsComponent implements OnInit {
 
       this.newService.getArchiveNew().subscribe({
         next: (data: any) => this.news = data.data,
+        error: (error: any) => console.error(error)
+      })
+    }
+  }
+
+  createNew(){
+    if(confirm('¿Estas seguro de que quieres crear esta noticia?')){
+      this.newService.createNew(this.valueTitle, this.valueDescription, this.valueContent, this.valueAuthor).subscribe({
+        next: (data: any) => {
+          this.news.unshift(data.data)
+        },
         error: (error: any) => console.error(error)
       })
     }
